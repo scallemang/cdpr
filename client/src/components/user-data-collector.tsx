@@ -2,16 +2,16 @@ import { useState } from "react";
 
 interface UserDataCollectorProps {
   onNameUpdate: (name: string) => void;
-  journalEntry: string;
-  onJournalChange: (entry: string) => void;
-  onSaveJournal: () => void;
+  // journalEntry: string; // Commented out - journal functionality removed
+  // onJournalChange: (entry: string) => void; // Commented out - journal functionality removed
+  // onSaveJournal: () => void; // Commented out - journal functionality removed
 }
 
 export function UserDataCollector({ 
   onNameUpdate, 
-  journalEntry, 
-  onJournalChange, 
-  onSaveJournal 
+  // journalEntry, // Commented out - journal functionality removed
+  // onJournalChange, // Commented out - journal functionality removed
+  // onSaveJournal // Commented out - journal functionality removed
 }: UserDataCollectorProps) {
   const [name, setName] = useState("");
 
@@ -54,7 +54,8 @@ export function UserDataCollector({
           </div>
         </div>
 
-        <div>
+        {/* Journal functionality removed */}
+        {/* <div>
           <label htmlFor="initial-journal" className="block text-sm font-medium text-foreground mb-2">
             Initial Thoughts (Optional):
           </label>
@@ -74,7 +75,7 @@ export function UserDataCollector({
           className="px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/90 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           data-testid="button-save-initial-journal">
           Save Journal Entry
-        </button>
+        </button> */}
       </div>
     </div>
   );

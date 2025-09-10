@@ -16,12 +16,12 @@ export default function Story() {
     visitedChapters,
     setCurrentChapter,
     updateUserData,
-    addJournalEntry,
+    // addJournalEntry, // Commented out - journal functionality removed
   } = useStoryState();
 
   const currentChapter = storyChapters.find(ch => ch.id === currentChapterId);
   
-  const [journalEntry, setJournalEntry] = useState("");
+  // const [journalEntry, setJournalEntry] = useState(""); // Commented out - journal functionality removed
 
   const handleChoice = (choiceId: string) => {
     const choice = currentChapter?.choices.find(c => c.id === choiceId);
@@ -30,12 +30,12 @@ export default function Story() {
     }
   };
 
-  const handleSaveJournal = () => {
-    if (journalEntry.trim()) {
-      addJournalEntry(currentChapterId, journalEntry);
-      setJournalEntry("");
-    }
-  };
+  // const handleSaveJournal = () => { // Commented out - journal functionality removed
+  //   if (journalEntry.trim()) {
+  //     addJournalEntry(currentChapterId, journalEntry);
+  //     setJournalEntry("");
+  //   }
+  // };
 
   const handleUserNameUpdate = (name: string) => {
     updateUserData({ ...userData, name });
@@ -44,7 +44,7 @@ export default function Story() {
   useKeyboardNavigation({
     choices: currentChapter?.choices || [],
     onChoice: handleChoice,
-    onSave: handleSaveJournal,
+    onSave: () => {}, // Dummy function - journal functionality removed
   });
 
   if (!currentChapter) {
@@ -75,9 +75,6 @@ export default function Story() {
         <main className="max-w-4xl mx-auto px-4 py-8">
           <UserDataCollector 
             onNameUpdate={handleUserNameUpdate}
-            journalEntry={journalEntry}
-            onJournalChange={setJournalEntry}
-            onSaveJournal={handleSaveJournal}
           />
         </main>
       </div>
@@ -121,8 +118,8 @@ export default function Story() {
           onChoice={handleChoice} 
         />
 
-        {/* Journal Entry Section for Named Users */}
-        <div className="bg-muted/30 rounded-lg border border-border p-6 mb-8">
+        {/* Journal Entry Section for Named Users - REMOVED */}
+        {/* <div className="bg-muted/30 rounded-lg border border-border p-6 mb-8">
           <h3 className="text-lg font-medium text-foreground mb-4">Update Your Journal</h3>
           <p className="text-sm text-muted-foreground mb-4">
             Record your thoughts about this part of your journey. This information will be remembered throughout your adventure.
@@ -151,14 +148,14 @@ export default function Story() {
               Save Entry
             </button>
           </div>
-        </div>
+        </div> */}
 
         <ProgressIndicator 
           currentChapter={visitedChapters.length}
           totalChapters={storyChapters.length}
           progressPercentage={progressPercentage}
           chaptersVisited={visitedChapters.length}
-          entriesCount={Object.keys(userData.journalEntries).length}
+          entriesCount={0} /* Journal functionality removed */
         />
       </main>
 
