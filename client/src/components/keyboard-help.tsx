@@ -11,10 +11,11 @@ export function KeyboardHelp() {
             <span className="kbd">3</span>
           </div>
         </div>
-        <div className="flex items-center justify-between">
+        {/* Journal functionality removed */}
+        {/* <div className="flex items-center justify-between">
           <span>Save journal:</span>
           <span className="kbd">Ctrl+S</span>
-        </div>
+        </div> */}
         <div className="flex items-center justify-between">
           <span>Reset story:</span>
           <span className="kbd">Ctrl+R</span>

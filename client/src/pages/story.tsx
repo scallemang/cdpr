@@ -10,14 +10,23 @@ import { storyChapters } from "@/lib/story-data";
 import { UserData } from "@shared/schema";
 
 export default function Story() {
+  const storyState = useStoryState();
   const {
     currentChapterId,
     userData,
     visitedChapters,
     setCurrentChapter,
     updateUserData,
+    resetStory,
     // addJournalEntry, // Commented out - journal functionality removed
-  } = useStoryState();
+  } = storyState;
+
+  // Expose resetStory globally for testing purposes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      (window as any).resetStory = resetStory;
+    }
+  }, [resetStory]);
 
   const currentChapter = storyChapters.find(ch => ch.id === currentChapterId);
   
@@ -45,6 +54,7 @@ export default function Story() {
     choices: currentChapter?.choices || [],
     onChoice: handleChoice,
     onSave: () => {}, // Dummy function - journal functionality removed
+    onReset: resetStory,
   });
 
   if (!currentChapter) {

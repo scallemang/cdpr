@@ -63,8 +63,8 @@ export function useStoryState() {
   };
 
   const resetStory = () => {
-    setState(defaultState);
     localStorage.removeItem(STORAGE_KEY);
+    setState({ ...defaultState }); // Create a new object to ensure React re-renders
   };
 
   return {

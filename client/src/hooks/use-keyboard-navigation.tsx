@@ -5,9 +5,10 @@ interface UseKeyboardNavigationProps {
   choices: StoryChoice[];
   onChoice: (choiceId: string) => void;
   onSave: () => void;
+  onReset?: () => void;
 }
 
-export function useKeyboardNavigation({ choices, onChoice, onSave }: UseKeyboardNavigationProps) {
+export function useKeyboardNavigation({ choices, onChoice, onSave, onReset }: UseKeyboardNavigationProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Handle choice selection
@@ -25,15 +26,22 @@ export function useKeyboardNavigation({ choices, onChoice, onSave }: UseKeyboard
         return;
       }
 
-      // Handle Ctrl+R for reset (could be implemented)
+      // Handle Ctrl+R for reset
       if (e.ctrlKey && e.key === 'r') {
         e.preventDefault();
-        // Could trigger a reset function if passed in
+        if (onReset) {
+          onReset();
+        }
         return;
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [choices, onChoice, onSave]);
+    document.addEventListener('keydown', handleKeyDown, { capture: true });
+    window.addEventListener('keydown', handleKeyDown, { capture: true });
+    
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, { capture: true });
+      window.removeEventListener('keydown', handleKeyDown, { capture: true });
+    };
+  }, [choices, onChoice, onSave, onReset]);
 }
