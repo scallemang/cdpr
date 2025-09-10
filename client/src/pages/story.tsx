@@ -58,6 +58,32 @@ export default function Story() {
     );
   }
 
+  // Show welcome screen if no user name is set
+  if (!userData.name) {
+    return (
+      <div className="min-h-screen bg-background">
+        {/* Simple header for welcome screen */}
+        <header className="border-b border-border bg-card/50 backdrop-blur-sm">
+          <div className="max-w-4xl mx-auto px-4 py-4">
+            <h1 className="text-xl font-semibold text-foreground" data-testid="story-title">
+              Story Engine
+            </h1>
+          </div>
+        </header>
+
+        {/* Welcome screen content */}
+        <main className="max-w-4xl mx-auto px-4 py-8">
+          <UserDataCollector 
+            onNameUpdate={handleUserNameUpdate}
+            journalEntry={journalEntry}
+            onJournalChange={setJournalEntry}
+            onSaveJournal={handleSaveJournal}
+          />
+        </main>
+      </div>
+    );
+  }
+
   const progressPercentage = Math.round((visitedChapters.length / storyChapters.length) * 100);
 
   return (
@@ -79,7 +105,7 @@ export default function Story() {
             <div className="text-sm text-muted-foreground">
               <span>Player: </span>
               <span className="font-medium text-foreground" data-testid="player-name">
-                {userData.name || "Anonymous"}
+                {userData.name}
               </span>
             </div>
           </div>
@@ -95,48 +121,37 @@ export default function Story() {
           onChoice={handleChoice} 
         />
 
-        {/* User Data Collection */}
-        {!userData.name && (
-          <UserDataCollector 
-            onNameUpdate={handleUserNameUpdate}
-            journalEntry={journalEntry}
-            onJournalChange={setJournalEntry}
-            onSaveJournal={handleSaveJournal}
-          />
-        )}
-
-        {userData.name && (
-          <div className="bg-muted/30 rounded-lg border border-border p-6 mb-8">
-            <h3 className="text-lg font-medium text-foreground mb-4">Update Your Journal</h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              Record your thoughts about this part of your journey. This information will be remembered throughout your adventure.
-            </p>
-            
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="journal-entry" className="block text-sm font-medium text-foreground mb-2">
-                  Journal Entry:
-                </label>
-                <textarea 
-                  id="journal-entry"
-                  value={journalEntry}
-                  onChange={(e) => setJournalEntry(e.target.value)}
-                  placeholder="What do you make of this situation? Your observations might prove useful later..."
-                  className="w-full h-24 px-3 py-2 bg-background border border-input rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
-                  data-testid="textarea-journal"
-                />
-              </div>
-              
-              <button 
-                onClick={handleSaveJournal}
-                disabled={!journalEntry.trim()}
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                data-testid="button-save-journal">
-                Save Entry
-              </button>
+        {/* Journal Entry Section for Named Users */}
+        <div className="bg-muted/30 rounded-lg border border-border p-6 mb-8">
+          <h3 className="text-lg font-medium text-foreground mb-4">Update Your Journal</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Record your thoughts about this part of your journey. This information will be remembered throughout your adventure.
+          </p>
+          
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="journal-entry" className="block text-sm font-medium text-foreground mb-2">
+                Journal Entry:
+              </label>
+              <textarea 
+                id="journal-entry"
+                value={journalEntry}
+                onChange={(e) => setJournalEntry(e.target.value)}
+                placeholder="What do you make of this situation? Your observations might prove useful later..."
+                className="w-full h-24 px-3 py-2 bg-background border border-input rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
+                data-testid="textarea-journal"
+              />
             </div>
+            
+            <button 
+              onClick={handleSaveJournal}
+              disabled={!journalEntry.trim()}
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              data-testid="button-save-journal">
+              Save Entry
+            </button>
           </div>
-        )}
+        </div>
 
         <ProgressIndicator 
           currentChapter={visitedChapters.length}
