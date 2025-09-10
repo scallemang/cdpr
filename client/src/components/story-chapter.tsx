@@ -7,7 +7,7 @@ interface StoryChapterProps {
 
 export function StoryChapter({ chapter, userData }: StoryChapterProps) {
   return (
-    <div className="bg-card rounded-lg border border-border shadow-sm p-8 mb-8 fade-in" data-testid="story-chapter">
+    <div className="story-chapter bg-card rounded-lg shadow-lg p-8 mb-8 fade-in" data-testid="story-chapter">
       <div className="story-prose max-w-none">
         <h1 data-testid="chapter-title">{chapter.title}</h1>
         

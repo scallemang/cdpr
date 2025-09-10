@@ -65,7 +65,7 @@ export default function Story() {
         {/* Simple header for welcome screen */}
         <header className="border-b border-border bg-card/50 backdrop-blur-sm">
           <div className="max-w-4xl mx-auto px-4 py-4">
-            <h1 className="text-xl font-semibold text-foreground" data-testid="story-title">
+            <h1 className="text-2xl font-display font-bold text-foreground tracking-tight" data-testid="story-title">
               Story Engine
             </h1>
           </div>
@@ -89,7 +89,7 @@ export default function Story() {
       <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <h1 className="text-xl font-semibold text-foreground" data-testid="story-title">
+            <h1 className="text-2xl font-display font-bold text-foreground tracking-tight" data-testid="story-title">
               Story Engine
             </h1>
             <span className="text-sm text-muted-foreground" data-testid="chapter-indicator">

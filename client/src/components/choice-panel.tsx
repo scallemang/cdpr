@@ -9,10 +9,10 @@ export function ChoicePanel({ choices, onChoice }: ChoicePanelProps) {
   if (choices.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-lg text-muted-foreground" data-testid="story-end">
+        <p className="text-2xl font-display font-bold text-foreground" data-testid="story-end">
           The End
         </p>
-        <p className="text-sm text-muted-foreground mt-2">
+        <p className="text-base font-medium text-muted-foreground mt-2">
           Thank you for playing!
         </p>
       </div>
@@ -21,7 +21,7 @@ export function ChoicePanel({ choices, onChoice }: ChoicePanelProps) {
 
   return (
     <div className="space-y-4 mb-8" data-testid="choice-panel">
-      <h3 className="text-lg font-medium text-foreground mb-4">Make your choice:</h3>
+      <h3 className="text-xl font-display font-bold text-foreground mb-6 tracking-tight">Make your choice:</h3>
       
       {choices.map((choice, index) => (
         <button 
@@ -36,7 +36,7 @@ export function ChoicePanel({ choices, onChoice }: ChoicePanelProps) {
                 <span className="kbd" data-testid={`kbd-${choice.keyboardKey}`}>
                   {choice.keyboardKey}
                 </span>
-                <span className="font-medium text-foreground group-hover:text-primary transition-colors">
+                <span className="font-semibold text-foreground group-hover:text-primary transition-colors text-lg">
                   {choice.text}
                 </span>
               </div>

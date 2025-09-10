@@ -23,14 +23,14 @@ export function UserDataCollector({
 
   return (
     <div className="bg-muted/30 rounded-lg border border-border p-6 mb-8" data-testid="user-data-collector">
-      <h3 className="text-lg font-medium text-foreground mb-4">Welcome, Adventurer!</h3>
+      <h3 className="text-xl font-display font-bold text-foreground mb-4 tracking-tight">Welcome, Adventurer!</h3>
       <p className="text-sm text-muted-foreground mb-4">
         Before we begin your journey, please tell us your name. This will be used throughout your adventure.
       </p>
       
       <div className="space-y-4">
         <div>
-          <label htmlFor="player-name" className="block text-sm font-medium text-foreground mb-2">
+          <label htmlFor="player-name" className="block text-sm font-semibold text-foreground mb-2">
             Your Name:
           </label>
           <div className="flex space-x-2">
@@ -47,7 +47,7 @@ export function UserDataCollector({
             <button 
               onClick={handleNameSubmit}
               disabled={!name.trim()}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               data-testid="button-save-name">
               Save
             </button>
