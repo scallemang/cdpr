@@ -98,9 +98,10 @@ export default function Story() {
   //   }
   // };
 
-  const handleUserNameUpdate = (name: string) => {
-    updateUserData({ ...userData, name });
-  };
+  // COMMENTED OUT: User name collection functionality
+  // const handleUserNameUpdate = (name: string) => {
+  //   updateUserData({ ...userData, name });
+  // };
 
   useKeyboardNavigation({
     choices: displayChapter?.choices || [],
@@ -120,28 +121,29 @@ export default function Story() {
     );
   }
 
+  // COMMENTED OUT: Welcome screen and user data collection
   // Show welcome screen if no user name is set
-  if (!userData.name) {
-    return (
-      <div className="min-h-screen bg-background">
-        {/* Simple header for welcome screen */}
-        <header className="border-b border-border bg-card/50 backdrop-blur-sm">
-          <div className="max-w-4xl mx-auto px-4 py-4">
-            <h1 className="text-2xl font-display font-bold text-foreground tracking-tight" data-testid="story-title">
-              Story Engine
-            </h1>
-          </div>
-        </header>
-
-        {/* Welcome screen content */}
-        <main className="max-w-4xl mx-auto px-4 py-8">
-          <UserDataCollector 
-            onNameUpdate={handleUserNameUpdate}
-          />
-        </main>
-      </div>
-    );
-  }
+  // if (!userData.name) {
+  //   return (
+  //     <div className="min-h-screen bg-background">
+  //       {/* Simple header for welcome screen */}
+  //       <header className="border-b border-border bg-card/50 backdrop-blur-sm">
+  //         <div className="max-w-4xl mx-auto px-4 py-4">
+  //           <h1 className="text-2xl font-display font-bold text-foreground tracking-tight" data-testid="story-title">
+  //             Story Engine
+  //           </h1>
+  //         </div>
+  //       </header>
+  //
+  //       {/* Welcome screen content */}
+  //       <main className="max-w-4xl mx-auto px-4 py-8">
+  //         <UserDataCollector 
+  //           onNameUpdate={handleUserNameUpdate}
+  //         />
+  //       </main>
+  //     </div>
+  //   );
+  // }
 
   const progressPercentage = Math.round((visitedChapters.length / storyChapters.length) * 100);
 
@@ -159,15 +161,15 @@ export default function Story() {
             </span>
           </div>
           
-          {/* User Data Display */}
-          <div className="flex items-center space-x-4">
+          {/* COMMENTED OUT: User Data Display */}
+          {/* <div className="flex items-center space-x-4">
             <div className="text-sm text-muted-foreground">
               <span>Player: </span>
               <span className="font-medium text-foreground" data-testid="player-name">
                 {userData.name}
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
       </header>
 
