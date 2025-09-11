@@ -13,7 +13,8 @@ interface StoryState {
 const defaultState: StoryState = {
   currentChapterId: "start",
   userData: {
-    journalEntries: {}
+    journalEntries: {},
+    choicesMade: {}
   },
   visitedChapters: ["start"],
   completedBranches: []
@@ -25,11 +26,16 @@ export function useStoryState() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsedState = JSON.parse(saved);
-        // Migration: ensure completedBranches is always an array
+        // Migration: ensure completedBranches and choicesMade are always initialized
         return {
           ...defaultState,
           ...parsedState,
-          completedBranches: parsedState.completedBranches || []
+          completedBranches: parsedState.completedBranches || [],
+          userData: {
+            ...defaultState.userData,
+            ...parsedState.userData,
+            choicesMade: parsedState.userData?.choicesMade || {}
+          }
         };
       }
       return defaultState;
@@ -101,6 +107,19 @@ export function useStoryState() {
     setState({ ...defaultState }); // Create a new object to ensure React re-renders
   };
 
+  const trackChoice = (chapterId: string, choiceId: string) => {
+    setState(prev => ({
+      ...prev,
+      userData: {
+        ...prev.userData,
+        choicesMade: {
+          ...prev.userData.choicesMade,
+          [chapterId]: choiceId
+        }
+      }
+    }));
+  };
+
   return {
     currentChapterId: state.currentChapterId,
     userData: state.userData,
@@ -112,6 +131,7 @@ export function useStoryState() {
     completeBranch,
     isAllBranchesCompleted,
     getAvailableBranches,
-    resetStory
+    resetStory,
+    trackChoice
   };
 }

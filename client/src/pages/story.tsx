@@ -22,6 +22,7 @@ export default function Story() {
     isAllBranchesCompleted,
     getAvailableBranches,
     resetStory,
+    trackChoice,
     // addJournalEntry, // Commented out - journal functionality removed
   } = storyState;
 
@@ -68,6 +69,9 @@ export default function Story() {
   const handleChoice = (choiceId: string) => {
     const choice = displayChapter?.choices.find((c: any) => c.id === choiceId);
     if (choice) {
+      // Track the choice made for dynamic ending generation
+      trackChoice(currentChapterId, choiceId);
+      
       // Handle branch completion logic
       if (choice.id.startsWith('choice-complete-')) {
         const branchType = choice.id.replace('choice-complete-', '');

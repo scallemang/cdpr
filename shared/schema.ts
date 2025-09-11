@@ -55,5 +55,6 @@ export interface StoryChapter {
 export interface UserData {
   name?: string;
   journalEntries: Record<string, string>;
+  choicesMade: Record<string, string>; // Track specific choices made throughout story
   [key: string]: any;
 }
