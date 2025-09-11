@@ -1,4 +1,5 @@
 import { StoryChapter as StoryChapterType, UserData } from "@shared/schema";
+import { generateDynamicEndingContent } from "@/lib/story-data";
 
 interface StoryChapterProps {
   chapter: StoryChapterType;
@@ -21,11 +22,14 @@ export function StoryChapter({ chapter, userData }: StoryChapterProps) {
         )}
 
         <div data-testid="story-content">
-          {typeof chapter.content === 'string' ? (
-            <div dangerouslySetInnerHTML={{ __html: chapter.content }} />
-          ) : (
-            chapter.content
-          )}
+          {chapter.id === "final-completion" ? 
+            generateDynamicEndingContent(userData) :
+            (typeof chapter.content === 'string' ? (
+              <div dangerouslySetInnerHTML={{ __html: chapter.content }} />
+            ) : (
+              chapter.content
+            ))
+          }
         </div>
       </div>
     </div>

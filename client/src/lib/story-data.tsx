@@ -1,4 +1,59 @@
-import { StoryChapter } from "@shared/schema";
+import { StoryChapter, UserData } from "@shared/schema";
+
+// Helper function to generate dynamic ending content based on choices made
+const generateDynamicEndingContent = (userData: UserData) => {
+  const choices = userData.choicesMade || {};
+  
+  // Analyze choices made in each branch
+  const technicalChoice = choices['technical-interview'];
+  const creativeChoice = choices['creative-interview'];
+  const referenceChoice = choices['reference-check'];
+  
+  // Generate personalized content based on specific choices
+  let technicalFeedback = "technical excellence";
+  if (technicalChoice === 'choice-easy-question') {
+    technicalFeedback = "methodical problem-solving approach, starting with fundamentals";
+  } else if (technicalChoice === 'choice-hard-question') {
+    technicalFeedback = "impressive ability to tackle complex technical challenges head-on";
+  } else if (technicalChoice === 'choice-witcher-question') {
+    technicalFeedback = "exceptional understanding of narrative-driven programming";
+  }
+  
+  let creativeFeedback = "creative storytelling";
+  if (creativeChoice === 'choice-crossover-story') {
+    creativeFeedback = "brilliant crossover storytelling that bridges different game universes";
+  } else if (creativeChoice === 'choice-character-development') {
+    creativeFeedback = "masterful character development that brings game worlds to life";
+  } else if (creativeChoice === 'choice-moral-dilemma') {
+    creativeFeedback = "thoughtful approach to complex moral narratives";
+  }
+  
+  let referenceFeedback = "glowing references";
+  if (referenceChoice === 'choice-previous-manager') {
+    referenceFeedback = "stellar professional recommendations from management";
+  } else if (referenceChoice === 'choice-colleague') {
+    referenceFeedback = "enthusiastic peer endorsements highlighting collaboration skills";
+  } else if (referenceChoice === 'choice-streamer') {
+    referenceFeedback = "unexpectedly insightful testimonials from the gaming community";
+  }
+  
+  return (
+    <>
+      <p>After completing all three phases of your legendary interview process, you lean back in your chair with a satisfied smile.</p>
+      <p>This candidate has proven themselves across every dimension that matters at CD Projekt Red:</p>
+      <ul className="list-disc pl-6 space-y-2 my-4">
+        <li><strong>Technical Assessment:</strong> Your evaluation revealed their {technicalFeedback}, showing they're ready for Night City's most complex challenges.</li>
+        <li><strong>Creative Evaluation:</strong> They demonstrated {creativeFeedback} that would make even Dandelion take notes.</li>
+        <li><strong>Reference Validation:</strong> You discovered {referenceFeedback} that could power Novigrad's brightest lights.</li>
+      </ul>
+      <p>You pick up your phone to call the candidate with the good news. After all, it's not every day you find someone who combines the right technical skills, creative vision, and team collaboration in such a compelling package.</p>
+      <p><strong>Welcome to CD Projekt Red, new team member!</strong></p>
+    </>
+  );
+};
+
+// Export the function for use in components
+export { generateDynamicEndingContent };
 
 export const storyChapters: StoryChapter[] = [
   {
