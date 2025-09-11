@@ -7,7 +7,7 @@ import { KeyboardHelp } from "@/components/keyboard-help";
 import { useKeyboardNavigation } from "@/hooks/use-keyboard-navigation";
 import { useStoryState } from "@/lib/story-state";
 import { storyChapters } from "@/lib/story-data";
-import { UserData } from "@shared/schema";
+import { UserData, StoryChapter as StoryChapterType } from "@shared/schema";
 
 export default function Story() {
   const storyState = useStoryState();
@@ -15,8 +15,12 @@ export default function Story() {
     currentChapterId,
     userData,
     visitedChapters,
+    completedBranches,
     setCurrentChapter,
     updateUserData,
+    completeBranch,
+    isAllBranchesCompleted,
+    getAvailableBranches,
     resetStory,
     // addJournalEntry, // Commented out - journal functionality removed
   } = storyState;
@@ -29,13 +33,61 @@ export default function Story() {
   }, [resetStory]);
 
   const currentChapter = storyChapters.find(ch => ch.id === currentChapterId);
+
+  // Handle dynamic branch selection chapter
+  const getDynamicChapter = () => {
+    if (currentChapterId === "branch-selection" && currentChapter) {
+      const availableBranches = getAvailableBranches();
+      if (availableBranches.length === 0) {
+        // All branches completed, go to final completion
+        setCurrentChapter("final-completion");
+        return storyChapters.find(ch => ch.id === "final-completion");
+      }
+      
+      // Create dynamic choices for available branches
+      const dynamicChoices = availableBranches.map((branch, index) => ({
+        id: `choice-${branch.id}`,
+        text: branch.name,
+        description: branch.description,
+        nextChapterId: branch.id,
+        keyboardKey: (index + 1).toString()
+      }));
+
+      return {
+        ...currentChapter,
+        choices: dynamicChoices
+      } as StoryChapterType;
+    }
+    return currentChapter;
+  };
+
+  const displayChapter = getDynamicChapter();
   
   // const [journalEntry, setJournalEntry] = useState(""); // Commented out - journal functionality removed
 
   const handleChoice = (choiceId: string) => {
-    const choice = currentChapter?.choices.find(c => c.id === choiceId);
+    const choice = displayChapter?.choices.find((c: any) => c.id === choiceId);
     if (choice) {
-      setCurrentChapter(choice.nextChapterId);
+      // Handle branch completion logic
+      if (choice.id.startsWith('choice-complete-')) {
+        const branchType = choice.id.replace('choice-complete-', '');
+        if (branchType === 'technical') {
+          completeBranch('technical-interview');
+        } else if (branchType === 'creative') {
+          completeBranch('creative-interview');
+        } else if (branchType === 'reference') {
+          completeBranch('reference-check');
+        }
+        
+        // Navigate to branch selection or final completion
+        if (isAllBranchesCompleted()) {
+          setCurrentChapter("final-completion");
+        } else {
+          setCurrentChapter("branch-selection");
+        }
+      } else {
+        setCurrentChapter(choice.nextChapterId);
+      }
     }
   };
 
@@ -51,13 +103,13 @@ export default function Story() {
   };
 
   useKeyboardNavigation({
-    choices: currentChapter?.choices || [],
+    choices: displayChapter?.choices || [],
     onChoice: handleChoice,
     onSave: () => {}, // Dummy function - journal functionality removed
     onReset: resetStory,
   });
 
-  if (!currentChapter) {
+  if (!displayChapter) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -103,7 +155,7 @@ export default function Story() {
               Story Engine
             </h1>
             <span className="text-sm text-muted-foreground" data-testid="chapter-indicator">
-              {currentChapter.title}
+              {displayChapter?.title}
             </span>
           </div>
           
@@ -121,10 +173,10 @@ export default function Story() {
 
       {/* Main Story Content */}
       <main className="max-w-4xl mx-auto px-4 py-8">
-        <StoryChapter chapter={currentChapter} userData={userData} />
+        {displayChapter && <StoryChapter chapter={displayChapter} userData={userData} />}
         
         <ChoicePanel 
-          choices={currentChapter.choices} 
+          choices={displayChapter?.choices || []} 
           onChoice={handleChoice} 
         />
 

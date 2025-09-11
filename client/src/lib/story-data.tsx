@@ -2,6 +2,42 @@ import { StoryChapter } from "@shared/schema";
 
 export const storyChapters: StoryChapter[] = [
   {
+    id: "branch-selection",
+    title: "Choose Your Next Move",
+    content: (
+      <>
+        <p>You've completed one phase of the interview process, but there's more to explore! As a thorough recruiter at CD Projekt Red, you know that a complete candidate evaluation requires multiple perspectives.</p>
+        <p>The candidate is proving interesting so far, but you have more tools in your recruitment arsenal. Which aspect would you like to investigate next?</p>
+      </>
+    ),
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&h=600",
+    imageAlt: "Professional interview setup with multiple paths ahead",
+    choices: [] // This will be populated dynamically based on available branches
+  },
+  {
+    id: "final-completion",
+    title: "The Verdict",
+    content: (
+      <>
+        <p>After exhausting all three phases of your legendary interview process—technical prowess, creative vision, and reference validation—you lean back in your chair with a satisfied smile.</p>
+        <p>This candidate has proven themselves across every dimension that matters at CD Projekt Red. They've demonstrated technical excellence worthy of Night City's most complex systems, creative storytelling that would make Dandelion jealous, and references so glowing they could power Novigrad for a week.</p>
+        <p>You pick up your phone to call the candidate with the good news. After all, it's not every day you find someone who truly understands that great games are built on the intersection of flawless code, compelling narratives, and collaborative teamwork.</p>
+        <p><strong>Welcome to CD Projekt Red, new team member!</strong></p>
+      </>
+    ),
+    image: "https://images.unsplash.com/photo-1521737451398-5c6fdd1b83a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&h=600",
+    imageAlt: "Celebration handshake between interviewer and successful candidate",
+    choices: [
+      {
+        id: "choice-restart",
+        text: "Start a new interview",
+        description: "Ready to evaluate another candidate?",
+        nextChapterId: "start",
+        keyboardKey: "1"
+      }
+    ]
+  },
+  {
     id: "start",
     title: "The Interview Gauntlet",
     content: (
@@ -221,9 +257,18 @@ export const storyChapters: StoryChapter[] = [
         <p>The candidate lights up like a Christmas tree in Novigrad. "Oh, I love this kind of challenge!" they exclaim. "You need a robust dialogue tree system with state management, character relationship tracking, and consequence propagation..."</p>
         <p>They start drawing diagrams (somehow, through the screen), talking about branching narratives, save-state management, and how to make sure players don't accidentally romance their horse.</p>
         <p>You're starting to think this person might actually understand that good RPGs are equal parts solid code and compelling storytelling.</p>
+        <p><strong>Technical interview complete!</strong> You've seen enough to know their coding skills are solid.</p>
       </>
     ),
-    choices: []
+    choices: [
+      {
+        id: "choice-complete-technical",
+        text: "Continue the interview process",
+        description: "The technical phase is complete. Let's explore other aspects.",
+        nextChapterId: "branch-selection",
+        keyboardKey: "1"
+      }
+    ]
   },
   {
     id: "crossover-pitch",
@@ -233,9 +278,18 @@ export const storyChapters: StoryChapter[] = [
         <p>The candidate grins and dives right in: "Picture this—Geralt gets transported to Night City through a botched portal spell. He has to adapt to a world where monsters are replaced by corpo executives and his silver sword doesn't work on cybernetic implants."</p>
         <p>"He teams up with V to track down a rogue mage who's been uploading consciousness into braindances, creating digital wraiths. The whole thing ends with Geralt having to choose between saving Night City or returning to his own world."</p>
         <p>You're trying not to smile too obviously. This is either brilliant or completely insane. Possibly both.</p>
+        <p><strong>Creative interview complete!</strong> Their storytelling skills are definitely up to par.</p>
       </>
     ),
-    choices: []
+    choices: [
+      {
+        id: "choice-complete-creative",
+        text: "Continue the interview process",
+        description: "The creative phase is complete. Let's explore other aspects.",
+        nextChapterId: "branch-selection",
+        keyboardKey: "1"
+      }
+    ]
   },
   {
     id: "character-design",
@@ -245,9 +299,18 @@ export const storyChapters: StoryChapter[] = [
         <p>The candidate thinks for a moment, then their face lights up. "I'd create a street kid from Night City who grew up on stories of witchers from old braindances. They've taught themselves basic alchemy using scavenged tech and bootleg chemicals."</p>
         <p>"They can't do real magic, but they've rigged cybernetic implants to mimic witcher signs. Their quest line would be about proving that courage and determination matter more than genetic mutations or fancy corporate enhancements."</p>
         <p>Okay, you're definitely impressed. This person gets character development.</p>
+        <p><strong>Creative interview complete!</strong> Their storytelling and character development skills are solid.</p>
       </>
     ),
-    choices: []
+    choices: [
+      {
+        id: "choice-complete-creative",
+        text: "Continue the interview process",
+        description: "The creative phase is complete. Let's explore other aspects.",
+        nextChapterId: "branch-selection",
+        keyboardKey: "1"
+      }
+    ]
   },
   {
     id: "moral-choice",
@@ -257,9 +320,18 @@ export const storyChapters: StoryChapter[] = [
         <p>The candidate leans forward, getting serious. "Here's the scenario: A corpo exec's child has been kidnapped, but the kidnappers are a group of refugees whose homes were destroyed by that same exec's construction project."</p>
         <p>"The player can: rescue the child and let the refugees face justice, help the refugees escape but leave the child, or try to find a third option that might save everyone but probably won't work perfectly."</p>
         <p>"No matter what you choose, someone suffers. That's what makes it interesting." They sit back with a slight smile. "The best RPG choices should keep players thinking long after they've made them."</p>
+        <p><strong>Creative interview complete!</strong> They definitely understand complex narrative design.</p>
       </>
     ),
-    choices: []
+    choices: [
+      {
+        id: "choice-complete-creative",
+        text: "Continue the interview process",
+        description: "The creative phase is complete. Let's explore other aspects.",
+        nextChapterId: "branch-selection",
+        keyboardKey: "1"
+      }
+    ]
   },
   {
     id: "manager-reference",
@@ -269,9 +341,18 @@ export const storyChapters: StoryChapter[] = [
         <p>You dial the number and get connected to Sarah, the candidate's previous manager. "Oh, them!" she says immediately. "Honestly, one of the best developers I've ever worked with. They once fixed a bug that had been haunting our codebase for months—turns out it was caused by a single misplaced semicolon."</p>
         <p>"They're also ridiculously good at explaining complex technical concepts. Like, they once taught our entire QA team how database optimization works using analogies to organizing a medieval feast."</p>
         <p>Sarah pauses. "Only downside? They have way too many opinions about which Witcher romance option is canon. But honestly, that just shows passion for storytelling."</p>
+        <p><strong>Reference check complete!</strong> The manager's feedback is overwhelmingly positive.</p>
       </>
     ),
-    choices: []
+    choices: [
+      {
+        id: "choice-complete-reference",
+        text: "Continue the interview process",
+        description: "The reference phase is complete. Let's explore other aspects.",
+        nextChapterId: "branch-selection",
+        keyboardKey: "1"
+      }
+    ]
   },
   {
     id: "colleague-reference",
@@ -281,9 +362,18 @@ export const storyChapters: StoryChapter[] = [
         <p>You reach Marcus, a fellow developer who worked alongside the candidate. "Oh yeah, they're solid," he says. "Super collaborative, always willing to help debug someone else's code, and they bring homemade cookies to crunch time sessions."</p>
         <p>"We once had to implement a really complex AI system under a tight deadline. They not only delivered their part early but helped three other team members finish theirs. Plus, they named all the AI variables after Witcher characters, which made the code weirdly fun to work with."</p>
         <p>"Only weird thing about them? They insist on testing every dialogue option in RPGs. Like, every single one. It took them 200 hours to finish our last game because they wanted to see every possible conversation branch."</p>
+        <p><strong>Reference check complete!</strong> The peer feedback shows great teamwork and dedication.</p>
       </>
     ),
-    choices: []
+    choices: [
+      {
+        id: "choice-complete-reference",
+        text: "Continue the interview process",
+        description: "The reference phase is complete. Let's explore other aspects.",
+        nextChapterId: "branch-selection",
+        keyboardKey: "1"
+      }
+    ]
   },
   {
     id: "streamer-reference",
@@ -294,9 +384,18 @@ export const storyChapters: StoryChapter[] = [
         <p>"They also helped me optimize my stream setup when I was having technical issues. Turns out they know as much about broadcast software as they do about game development. Plus, they donated like $500 to my charity stream last year."</p>
         <p>"Oh, and they're the one who figured out that speedrun trick everyone uses now. You know, the one where you use Quen to clip through walls? Yeah, that was them."</p>
         <p>This is... not what you expected from a Twitch streamer reference.</p>
+        <p><strong>Reference check complete!</strong> Even the unconventional reference was surprisingly positive.</p>
       </>
     ),
-    choices: []
+    choices: [
+      {
+        id: "choice-complete-reference",
+        text: "Continue the interview process",
+        description: "The reference phase is complete. Let's explore other aspects.",
+        nextChapterId: "branch-selection",
+        keyboardKey: "1"
+      }
+    ]
   },
   {
     id: "advanced-technical",
@@ -307,9 +406,18 @@ export const storyChapters: StoryChapter[] = [
         <p>The candidate doesn't hesitate: "First, I'd check if it's hardware-dependent or universal. Then I'd profile the loading sequences to identify bottlenecks. Could be asset streaming, memory fragmentation, or even save-game complexity varying by player choice."</p>
         <p>"I'd also check if certain story branches create more complex game states that take longer to reconstruct. Sometimes the technical and narrative sides of RPGs interact in unexpected ways."</p>
         <p>You nod approvingly. This person definitely knows their stuff.</p>
+        <p><strong>Technical interview complete!</strong> Their advanced debugging skills are impressive.</p>
       </>
     ),
-    choices: []
+    choices: [
+      {
+        id: "choice-complete-technical",
+        text: "Continue the interview process",
+        description: "The technical phase is complete. Let's explore other aspects.",
+        nextChapterId: "branch-selection",
+        keyboardKey: "1"
+      }
+    ]
   },
   {
     id: "technical-success",
@@ -319,9 +427,18 @@ export const storyChapters: StoryChapter[] = [
         <p>You lean back in your chair, genuinely impressed. This candidate just explained real-time ray tracing with the confidence of someone who's actually implemented it, not just read about it on Stack Overflow.</p>
         <p>They even mentioned specific optimization techniques and talked about balancing visual quality with performance in ways that show deep understanding of both the technical and player experience sides of game development.</p>
         <p>"Well," you say, trying to keep the excitement out of your voice, "I think we might have found our senior graphics programmer."</p>
+        <p><strong>Technical interview complete!</strong> They demonstrated expert-level technical knowledge.</p>
       </>
     ),
-    choices: []
+    choices: [
+      {
+        id: "choice-complete-technical",
+        text: "Continue the interview process",
+        description: "The technical phase is complete. Let's explore other aspects.",
+        nextChapterId: "branch-selection",
+        keyboardKey: "1"
+      }
+    ]
   },
   {
     id: "creative-switch",
@@ -334,6 +451,14 @@ export const storyChapters: StoryChapter[] = [
         <p>You scribble notes. This person can think on their feet.</p>
       </>
     ),
-    choices: []
+    choices: [
+      {
+        id: "choice-continue-interview",
+        text: "Continue the interview process",
+        description: "This phase is complete. Let's see what else we can discover.",
+        nextChapterId: "branch-selection",
+        keyboardKey: "1"
+      }
+    ]
   }
 ];
