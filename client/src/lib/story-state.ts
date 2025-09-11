@@ -23,7 +23,16 @@ export function useStoryState() {
   const [state, setState] = useState<StoryState>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : defaultState;
+      if (saved) {
+        const parsedState = JSON.parse(saved);
+        // Migration: ensure completedBranches is always an array
+        return {
+          ...defaultState,
+          ...parsedState,
+          completedBranches: parsedState.completedBranches || []
+        };
+      }
+      return defaultState;
     } catch {
       return defaultState;
     }
