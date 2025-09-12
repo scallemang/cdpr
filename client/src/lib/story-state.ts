@@ -11,12 +11,12 @@ interface StoryState {
 }
 
 const defaultState: StoryState = {
-  currentChapterId: "start",
+  currentChapterId: "game-start",
   userData: {
     journalEntries: {},
     choicesMade: {}
   },
-  visitedChapters: ["start"],
+  visitedChapters: ["game-start"],
   completedBranches: []
 };
 
@@ -89,15 +89,15 @@ export function useStoryState() {
   };
 
   const isAllBranchesCompleted = () => {
-    const allBranches = ["technical-interview", "creative-interview", "reference-check"];
+    const allBranches = ["path01", "path02", "path03"];
     return allBranches.every(branch => state.completedBranches.includes(branch));
   };
 
   const getAvailableBranches = () => {
     const allBranches = [
-      { id: "technical-interview", name: "Start with the technical interview", description: "Time to see if they can hack it in the cyberpunk future... or just hack poorly." },
-      { id: "creative-interview", name: "Test their storytelling abilities", description: "Every great RPG needs great stories. Let's see what tales they can weave." },
-      { id: "reference-check", name: "Call their references", description: "Sometimes the best insights come from those who've worked with them before." }
+      { id: "path01", name: "Start with the technical interview", description: "Time to see if they can hack it in the cyberpunk future... or just hack poorly." },
+      { id: "path02", name: "Test their storytelling abilities", description: "Every great RPG needs great stories. Let's see what tales they can weave." },
+      { id: "path03", name: "Call their references", description: "Sometimes the best insights come from those who've worked with them before." }
     ];
     return allBranches.filter(branch => !state.completedBranches.includes(branch.id));
   };

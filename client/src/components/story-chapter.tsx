@@ -22,7 +22,7 @@ export function StoryChapter({ chapter, userData }: StoryChapterProps) {
         )}
 
         <div data-testid="story-content">
-          {chapter.id === "final-completion" ? 
+          {chapter.id === "game-over" ? 
             generateDynamicEndingContent(userData) :
             (typeof chapter.content === 'string' ? (
               <div dangerouslySetInnerHTML={{ __html: chapter.content }} />

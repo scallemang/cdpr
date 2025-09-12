@@ -37,12 +37,12 @@ export default function Story() {
 
   // Handle dynamic branch selection chapter
   const getDynamicChapter = () => {
-    if (currentChapterId === "branch-selection" && currentChapter) {
+    if (currentChapterId === "branch-hub" && currentChapter) {
       const availableBranches = getAvailableBranches();
       if (availableBranches.length === 0) {
         // All branches completed, go to final completion
-        setCurrentChapter("final-completion");
-        return storyChapters.find(ch => ch.id === "final-completion");
+        setCurrentChapter("game-over");
+        return storyChapters.find(ch => ch.id === "game-over");
       }
       
       // Create dynamic choices for available branches
@@ -76,18 +76,18 @@ export default function Story() {
       if (choice.id.startsWith('choice-complete-')) {
         const branchType = choice.id.replace('choice-complete-', '');
         if (branchType === 'technical') {
-          completeBranch('technical-interview');
+          completeBranch('path01');
         } else if (branchType === 'creative') {
-          completeBranch('creative-interview');
+          completeBranch('path02');
         } else if (branchType === 'reference') {
-          completeBranch('reference-check');
+          completeBranch('path03');
         }
         
         // Navigate to branch selection or final completion
         if (isAllBranchesCompleted()) {
-          setCurrentChapter("final-completion");
+          setCurrentChapter("game-over");
         } else {
-          setCurrentChapter("branch-selection");
+          setCurrentChapter("branch-hub");
         }
       } else {
         setCurrentChapter(choice.nextChapterId);

@@ -5,35 +5,35 @@ const generateDynamicEndingContent = (userData: UserData) => {
   const choices = userData.choicesMade || {};
   
   // Analyze choices made in each branch
-  const technicalChoice = choices['technical-interview'];
-  const creativeChoice = choices['creative-interview'];
-  const referenceChoice = choices['reference-check'];
+  const technicalChoice = choices['path01'];
+  const creativeChoice = choices['path02'];
+  const referenceChoice = choices['path03'];
   
   // Generate personalized content based on specific choices
   let technicalFeedback = "technical excellence";
-  if (technicalChoice === 'choice-easy-question') {
+  if (technicalChoice === 'path01-choice01') {
     technicalFeedback = "methodical problem-solving approach, starting with fundamentals";
-  } else if (technicalChoice === 'choice-hard-question') {
+  } else if (technicalChoice === 'path01-choice02') {
     technicalFeedback = "impressive ability to tackle complex technical challenges head-on";
-  } else if (technicalChoice === 'choice-witcher-question') {
+  } else if (technicalChoice === 'path01-choice03') {
     technicalFeedback = "exceptional understanding of narrative-driven programming";
   }
   
   let creativeFeedback = "creative storytelling";
-  if (creativeChoice === 'choice-crossover-story') {
+  if (creativeChoice === 'path02-choice01') {
     creativeFeedback = "brilliant crossover storytelling that bridges different game universes";
-  } else if (creativeChoice === 'choice-character-development') {
+  } else if (creativeChoice === 'path02-choice02') {
     creativeFeedback = "masterful character development that brings game worlds to life";
-  } else if (creativeChoice === 'choice-moral-dilemma') {
+  } else if (creativeChoice === 'path02-choice03') {
     creativeFeedback = "thoughtful approach to complex moral narratives";
   }
   
   let referenceFeedback = "glowing references";
-  if (referenceChoice === 'choice-previous-manager') {
+  if (referenceChoice === 'path03-choice01') {
     referenceFeedback = "stellar professional recommendations from management";
-  } else if (referenceChoice === 'choice-colleague') {
+  } else if (referenceChoice === 'path03-choice02') {
     referenceFeedback = "enthusiastic peer endorsements highlighting collaboration skills";
-  } else if (referenceChoice === 'choice-streamer') {
+  } else if (referenceChoice === 'path03-choice03') {
     referenceFeedback = "unexpectedly insightful testimonials from the gaming community";
   }
   
@@ -57,7 +57,7 @@ export { generateDynamicEndingContent };
 
 export const storyChapters: StoryChapter[] = [
   {
-    id: "branch-selection",
+    id: "branch-hub",
     title: "Choose Your Next Move",
     content: (
       <>
@@ -70,7 +70,7 @@ export const storyChapters: StoryChapter[] = [
     choices: [] // This will be populated dynamically based on available branches
   },
   {
-    id: "final-completion",
+    id: "game-over",
     title: "The Verdict",
     content: (
       <>
@@ -84,16 +84,16 @@ export const storyChapters: StoryChapter[] = [
     imageAlt: "Celebration handshake between interviewer and successful candidate",
     choices: [
       {
-        id: "choice-restart",
+        id: "game-choice01",
         text: "Start a new interview",
         description: "Ready to evaluate another candidate?",
-        nextChapterId: "start",
+        nextChapterId: "game-start",
         keyboardKey: "1"
       }
     ]
   },
   {
-    id: "start",
+    id: "game-start",
     title: "The Interview Gauntlet",
     content: (
       <>
@@ -106,30 +106,30 @@ export const storyChapters: StoryChapter[] = [
     imageAlt: "Modern office workspace with computer and coffee",
     choices: [
       {
-        id: "choice-technical",
+        id: "game-choice02",
         text: "Start with the technical interview",
         description: "Time to see if they can hack it in the cyberpunk future... or just hack poorly.",
-        nextChapterId: "technical-interview",
+        nextChapterId: "path01",
         keyboardKey: "1"
       },
       {
-        id: "choice-creative",
+        id: "game-choice03",
         text: "Test their storytelling abilities",
         description: "Every great RPG needs great stories. Let's see what tales they can weave.",
-        nextChapterId: "creative-interview",
+        nextChapterId: "path02",
         keyboardKey: "2"
       },
       {
-        id: "choice-references",
+        id: "game-choice04",
         text: "Call their references",
         description: "Sometimes the best insights come from those who've worked with them before.",
-        nextChapterId: "reference-check",
+        nextChapterId: "path03",
         keyboardKey: "3"
       }
     ]
   },
   {
-    id: "technical-interview",
+    id: "path01",
     title: "Jacking into the Matrix",
     content: (
       <>
@@ -142,30 +142,30 @@ export const storyChapters: StoryChapter[] = [
     imageAlt: "Futuristic computer setup with multiple monitors",
     choices: [
       {
-        id: "choice-easy-question",
+        id: "path01-choice01",
         text: "Start with a warm-up question",
         description: "How do you optimize a game for both PS5 and a potato PC?",
-        nextChapterId: "easy-technical",
+        nextChapterId: "path01-scene01",
         keyboardKey: "1"
       },
       {
-        id: "choice-hard-question",
+        id: "path01-choice02",
         text: "Jump straight to the deep end",
         description: "Explain how you'd implement real-time ray tracing in a cyberpunk cityscape.",
-        nextChapterId: "hard-technical",
+        nextChapterId: "path01-scene02",
         keyboardKey: "2"
       },
       {
-        id: "choice-witcher-question",
+        id: "path01-choice03",
         text: "Ask about narrative-driven programming",
         description: "How would you code a dialogue system with 47 different conversation paths?",
-        nextChapterId: "narrative-technical",
+        nextChapterId: "path01-scene03",
         keyboardKey: "3"
       }
     ]
   },
   {
-    id: "creative-interview",
+    id: "path02",
     title: "The Bard's Test",
     content: (
       <>
@@ -178,30 +178,30 @@ export const storyChapters: StoryChapter[] = [
     imageAlt: "Creative workspace with art supplies and sketches",
     choices: [
       {
-        id: "choice-crossover-story",
+        id: "path02-choice01",
         text: "Ask for a Witcher-Cyberpunk crossover",
         description: "What happens when Geralt visits Night City?",
-        nextChapterId: "crossover-pitch",
+        nextChapterId: "path02-scene01",
         keyboardKey: "1"
       },
       {
-        id: "choice-character-development",
+        id: "path02-choice02",
         text: "Test character development skills",
         description: "Create a companion character for either universe.",
-        nextChapterId: "character-design",
+        nextChapterId: "path02-scene02",
         keyboardKey: "2"
       },
       {
-        id: "choice-moral-dilemma",
+        id: "path02-choice03",
         text: "Present a moral choice scenario",
         description: "Design a quest with no clearly 'right' answer.",
-        nextChapterId: "moral-choice",
+        nextChapterId: "path02-scene03",
         keyboardKey: "3"
       }
     ]
   },
   {
-    id: "reference-check",
+    id: "path03",
     title: "The Investigation Begins",
     content: (
       <>
@@ -214,30 +214,30 @@ export const storyChapters: StoryChapter[] = [
     imageAlt: "Person making a professional phone call at a desk",
     choices: [
       {
-        id: "choice-previous-manager",
+        id: "path03-choice01",
         text: "Call the previous manager",
         description: "Start with the most obvious choice—their last boss.",
-        nextChapterId: "manager-reference",
+        nextChapterId: "path03-scene01",
         keyboardKey: "1"
       },
       {
-        id: "choice-colleague",
+        id: "path03-choice02",
         text: "Contact the colleague",
         description: "Sometimes peers give the most honest feedback.",
-        nextChapterId: "colleague-reference",
+        nextChapterId: "path03-scene02",
         keyboardKey: "2"
       },
       {
-        id: "choice-streamer",
+        id: "path03-choice03",
         text: "Call the Twitch streamer",
         description: "This should be... enlightening.",
-        nextChapterId: "streamer-reference",
+        nextChapterId: "path03-scene03",
         keyboardKey: "3"
       }
     ]
   },
   {
-    id: "easy-technical",
+    id: "path01-scene01",
     title: "The Warm-Up Round",
     content: (
       <>
@@ -271,7 +271,7 @@ export const storyChapters: StoryChapter[] = [
     ]
   },
   {
-    id: "hard-technical",
+    id: "path01-scene02",
     title: "The Deep Dive",
     content: (
       <>
@@ -305,7 +305,7 @@ export const storyChapters: StoryChapter[] = [
     ]
   },
   {
-    id: "narrative-technical",
+    id: "path01-scene03",
     title: "Code Meets Story",
     content: (
       <>
@@ -326,7 +326,7 @@ export const storyChapters: StoryChapter[] = [
     ]
   },
   {
-    id: "crossover-pitch",
+    id: "path02-scene01",
     title: "When Worlds Collide",
     content: (
       <>
@@ -347,7 +347,7 @@ export const storyChapters: StoryChapter[] = [
     ]
   },
   {
-    id: "character-design",
+    id: "path02-scene02",
     title: "Creating Legends",
     content: (
       <>
@@ -368,7 +368,7 @@ export const storyChapters: StoryChapter[] = [
     ]
   },
   {
-    id: "moral-choice",
+    id: "path02-scene03",
     title: "The Gray Area",
     content: (
       <>
@@ -389,7 +389,7 @@ export const storyChapters: StoryChapter[] = [
     ]
   },
   {
-    id: "manager-reference",
+    id: "path03-scene01",
     title: "The Boss's Word",
     content: (
       <>
@@ -410,7 +410,7 @@ export const storyChapters: StoryChapter[] = [
     ]
   },
   {
-    id: "colleague-reference",
+    id: "path03-scene02",
     title: "Peer Review",
     content: (
       <>
@@ -431,7 +431,7 @@ export const storyChapters: StoryChapter[] = [
     ]
   },
   {
-    id: "streamer-reference",
+    id: "path03-scene03",
     title: "The Wild Card",
     content: (
       <>
